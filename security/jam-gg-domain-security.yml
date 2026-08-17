@@ -1,0 +1,38 @@
+generated: '2026-08-17'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: jam.gg
+  https: false
+domains:
+- domain: jam.gg
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none
+x-findings:
+  note: >-
+    Added by hand on 2026-08-17 alongside the mechanical probe. The probe's boolean fields are
+    correct as booleans (a record of each type is present) but both records are malformed in ways
+    that make them non-functional, which the booleans cannot express. Recorded here rather than by
+    overwriting the probe's output.
+  https_false_detail: >-
+    `https: false` here is not a missing-redirect finding — the TLS handshake itself never completes.
+    jam.gg (Netlify / AWS Global Accelerator, 75.2.70.75 and 99.83.190.102) answers the ClientHello
+    with TLS alert 80 (internal_error), the signature of a hostname with no provisioned certificate.
+    www.jam.gg (proxy-ssl.webflow.com) answers with TLS alert 40 (handshake_failure). Port 80 on both
+    still returns 301 into that dead HTTPS origin, so no client can reach the site at all.
+  spf: >-
+    RFC 7208 section 3.2 violation — jam.gg publishes TWO v=spf1 TXT records:
+    "v=spf1 include:secureserver.net -all" and
+    "v=spf1 include:_spf.mailersend.net include:secureserver.net -all".
+    More than one SPF record means a checking implementation MUST return permerror, so SPF
+    evaluation fails for the domain despite a record being present.
+  dmarc: >-
+    RFC 7489 violation — the _dmarc.jam.gg TXT record is
+    "Value: v=DMARC1; p=none; rua=mailto:jules@jam.gg". The literal "Value: " prefix means the record
+    does not begin with the required v=DMARC1 tag, so conforming receivers discard it as not a DMARC
+    record. The effective policy is therefore no DMARC at all, not p=none. This looks like a control
+    panel form field label pasted into the record value.
+  mail: jam.gg MX points at jam-gg.mail.protection.outlook.com (Microsoft 365); registrar/DNS is GoDaddy (domaincontrol.com nameservers).

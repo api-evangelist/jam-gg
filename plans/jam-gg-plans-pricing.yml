@@ -1,0 +1,16 @@
+generated: '2026-08-17'
+method: probed
+source: 'https://jam.gg/ — TLS alert 80 internal_error (no HTTP response); http://jam.gg/ -> 301'
+plan_count: 0
+plans: []
+note: >-
+  An honest zero, recorded rather than omitted. No pricing or plans page could be read because the
+  entire jam.gg web property is unreachable: port 443 fails the TLS handshake on both jam.gg
+  (alert 80, internal_error) and www.jam.gg (alert 40, handshake_failure), while port 80 301-redirects
+  into that dead HTTPS origin. There is no developer portal, no api.jam.gg and no docs host in DNS to
+  fall back to. Historically the consumer product was free-to-play with no published developer plans,
+  and Y Combinator lists the company as Inactive
+  (https://www.ycombinator.com/companies/jam-gg, HTTP 200, fetched 2026-08-17), noting the business
+  split in 2023 with Jam.gg becoming inactive. So this zero reflects a company that no longer sells
+  anything, not a pricing page we failed to find.
+last_reachable_snapshot: '2025-04-23 (Internet Archive CDX: last HTTP 200 for jam.gg; 403 by 2025-05-18, 301 by 2025-08-20)'

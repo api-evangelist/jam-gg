@@ -1,0 +1,86 @@
+generated: '2026-08-17'
+method: searched
+source: https://github.com/piepacker + https://repo1.maven.org/maven2/io/github/piepacker/
+note: >-
+  Jam.gg's first-party developer libraries are published from the GitHub organization
+  https://github.com/piepacker (org display name "Jam.gg" — the company shipped as Piepacker
+  before the 2022 rebrand and never renamed the org). Registry metadata was read from
+  Maven Central directly (repo1.maven.org maven-metadata.xml) because the solrsearch index
+  returns 0 results for the io.github.piepacker group. Two of the three first-party libraries
+  are distributed as source only (Unity assets / native plugin DLLs committed to the repo) and
+  therefore have no registry metadata endpoint to query; their currency is recorded from the
+  last push to the default branch. Nothing was found on npm, PyPI, NuGet, RubyGems, crates.io,
+  Packagist or pkg.go.dev under any jam.gg / jamgg / piepacker name. An npm package named
+  `jampad` exists (0.0.1-alpha.2, 2025-07-15) but declares no repository, description or author
+  and CANNOT be attributed to Jam.gg, so it is deliberately excluded.
+packages:
+- language: kotlin
+  registry: maven
+  name: io.github.piepacker:jampadcompose
+  url: https://repo1.maven.org/maven2/io/github/piepacker/jampadcompose/
+  source_code: https://github.com/piepacker/JamPadCompose
+  install: implementation("io.github.piepacker:jampadcompose:0.1.0-alpha4")
+  official: true
+  license: Apache-2.0
+  version: 0.1.0-alpha4
+  published: '2025-03-31'
+  description: >-
+    JamPadCompose — a Compose Multiplatform library for building custom on-screen virtual
+    gamepads (ControlAnalog, ControlButton, ControlCross, ControlFaceButtons). Copyright
+    notice in the repository reads "Copyright 2024 Jam.gg", confirming first-party authorship.
+  targets:
+  - io.github.piepacker:jampadcompose-android
+  - io.github.piepacker:jampadcompose-desktop
+  - io.github.piepacker:jampadcompose-iosarm64
+  - io.github.piepacker:jampadcompose-iossimulatorarm64
+  - io.github.piepacker:jampadcompose-iosx64
+  note: >-
+    All five platform artifacts carry the same release 0.1.0-alpha4 with lastUpdated
+    20250331193441. Still pre-1.0 alpha; the only GitHub release/tag is 0.0.1-alpha1
+    (2024-05-02), so the published alphas after that are untagged.
+- language: csharp
+  registry: github
+  name: JamSDK-Public
+  url: https://github.com/piepacker/JamSDK-Public
+  install: "Copy bindings/csharp/JamSDK.cs into Assets/ and prebuilt/jam_sdk.dll|.so into Assets/Plugins/"
+  official: true
+  license: null
+  version: null
+  published: null
+  description: >-
+    "Software Development Kit for games on Jam.gg" — a P/Invoke C# binding over a native
+    jam_sdk shared library. It exposes the session context the Jam.gg runtime injects into a
+    hosted game process: set_env_path, get_cluster_name, get_connection_host, get_player_idx,
+    get_session_id, get_user_session_id. This is an FFI surface, not an HTTP API — there is no
+    REST/GraphQL contract to describe.
+  note: >-
+    Distributed as source + committed prebuilt binaries (jam_sdk.dll, jam_sdk.so); there is no
+    package registry entry and no tags or releases, so version/published are null — checked,
+    nothing to record. Last push to the default branch was 2022-12-13. The repository carries no
+    LICENSE file. get_display_name is commented out in the binding with the note "no longer
+    implemented serverside", an in-source decay marker.
+- language: csharp
+  registry: github
+  name: PiepackerUnityPlugin
+  url: https://github.com/piepacker/PiepackerUnityPlugin
+  install: "Add Piepacker.cs + Piepacker.jslib to a Unity WebGL project"
+  official: true
+  license: MIT
+  version: null
+  published: null
+  description: >-
+    Unity JsLib plugin that bridges a WebGL game to the Jam.gg (Piepacker) browser host, exposing
+    SessionID, UserSessionID, UserID, PlayerIdx, ClusterName, ConnectionHost and DisplayName as
+    extern C# calls. The browser-side predecessor to JamSDK-Public.
+  note: >-
+    Source-only Unity plugin — no registry, no tags, no releases, so version/published are null.
+    Last push to the default branch was 2022-05-13. Superseded in practice by JamSDK-Public.
+registries_checked:
+- {registry: maven, result: hit, detail: 'io.github.piepacker group, 6 artifacts'}
+- {registry: npm, result: miss, detail: 'jam-gg, jamgg, piepacker, @jam.gg/sdk all 404; jampad exists but is unattributable'}
+- {registry: pypi, result: miss, detail: 'jamgg, jam-gg, piepacker all 404'}
+- {registry: nuget, result: miss, detail: 'query "jam.gg" returned totalHits 0'}
+- {registry: rubygems, result: miss}
+- {registry: crates.io, result: miss}
+- {registry: packagist, result: miss}
+- {registry: pkg.go.dev, result: miss}

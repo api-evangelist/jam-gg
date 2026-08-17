@@ -1,0 +1,43 @@
+generated: '2026-08-17'
+method: searched
+source: https://github.com/piepacker/JamSDK-Public/blob/main/jam.env
+docs: https://github.com/piepacker/JamSDK-Public#mock-values
+summary: >-
+  Jam.gg publishes no hosted sandbox, no test/live key separation and no developer console. The only
+  published test surface is a local mock-values file shipped with the Unity SDK: the Jam.gg runtime
+  normally injects the session context into a hosted game process, and for local development the SDK
+  reads that context from a `jam.env` file on disk instead. Values below are verbatim from the
+  repository — nothing here is invented.
+mode:
+  style: local-mock-file
+  test_live_separation: false
+  key_prefixes: []
+  note: >-
+    There are no API keys of any kind. The SDK is a native FFI binding, not an HTTP client, so there
+    is no credential to scope to a test mode.
+mock_file:
+  name: jam.env
+  override_function: 'SetEnvPath(path) / set_env_path(path) — call before any other SDK call'
+  default_paths:
+  - {platform: android, path: /data/local/tmp/jam.env}
+  - {platform: linux, path: /home/jam/jam.env}
+  - {platform: windows, path: 'C:\jam\jam.env'}
+  values:
+  - {key: CLUSTER_NAME, value: cluster-name-test, read_by: 'get_cluster_name() / ClusterName()'}
+  - {key: CONNECTION_HOST, value: localhost, read_by: 'get_connection_host() / ConnectionHost()'}
+  - {key: DISPLAY_NAME, value: display-name-test, read_by: 'get_display_name() — DISABLED, see note'}
+  - {key: PLAYER_IDX, value: '0', read_by: 'get_player_idx() / PlayerIdx()'}
+  - {key: SESSION_ID, value: session-id-test, read_by: 'get_session_id() / SessionID()'}
+  - {key: USER_SESSION_ID, value: user-session-id-test, read_by: 'get_user_session_id() / UserSessionID()'}
+  note: >-
+    DISPLAY_NAME is still shipped in jam.env but its accessor is commented out in
+    bindings/csharp/JamSDK.cs with the verbatim comment "Commented out because it is no longer
+    implemented serverside" — the mock file and the binding have drifted apart.
+test_cards: []
+test_clocks: null
+fixtures: []
+not_published:
+- hosted sandbox / developer console
+- test vs live API keys
+- seeded test accounts
+- webhook event trigger tooling

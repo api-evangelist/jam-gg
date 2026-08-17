@@ -1,0 +1,14 @@
+generated: '2026-08-17'
+method: probed
+source: 'https://jam.gg/ — TLS alert 80 internal_error (no HTTP response); https://github.com/piepacker/JamSDK-Public'
+limit_count: 0
+limits: []
+headers: []
+status_on_exhaustion: null
+note: >-
+  An honest zero. There is no HTTP API to rate-limit: Jam.gg's only published developer surface is a
+  native FFI SDK (JamSDK-Public) that reads session context injected into a hosted game process, plus a
+  Compose Multiplatform gamepad UI library — neither makes calls a provider could throttle, and neither
+  documents a limit. No REST/GraphQL contract, no api.jam.gg host in DNS, and the docs/marketing site
+  cannot complete a TLS handshake, so no published limits could be read and none could be observed on a
+  live response either.

@@ -1,0 +1,40 @@
+generated: '2026-08-17'
+method: probed
+source: live HTTPS probes of jam.gg and www.jam.gg
+host: https://jam.gg
+result: no-documents
+note: >-
+  RECORDED ABSENCE, NOT A PRESENCE — no WellKnown or SecurityTxt pointer is wired from this file
+  because not one path returned a document. Every probe failed at the TLS layer before any HTTP
+  request was sent: jam.gg (Netlify/AWS Global Accelerator, 75.2.70.75 / 99.83.190.102) answers the
+  ClientHello with TLS alert 80 (internal_error), the signature of a hostname with no provisioned
+  certificate; www.jam.gg (proxy-ssl.webflow.com) answers with TLS alert 40 (handshake_failure).
+  Port 80 is still listening and 301-redirects to the HTTPS origin that cannot complete a handshake,
+  so the site is unreachable by any client. There is therefore no `status:` integer to record for
+  these paths — `status: null` with `transport: tls-handshake-failure` is the honest value, and a
+  numeric code here would be fabricated.
+transport:
+  jam.gg:
+    port_80: {status: 301, location: 'https://jam.gg/'}
+    port_443: {status: null, error: 'TLS alert 80 internal_error', tls_completed: false}
+  www.jam.gg:
+    port_80: {status: 301, location: 'https://www.jam.gg/'}
+    port_443: {status: null, error: 'TLS alert 40 handshake_failure', tls_completed: false}
+documents:
+- {path: /.well-known/security.txt, status: null, transport: tls-handshake-failure}
+- {path: /.well-known/openid-configuration, status: null, transport: tls-handshake-failure}
+- {path: /.well-known/oauth-authorization-server, status: null, transport: tls-handshake-failure}
+- {path: /.well-known/api-catalog, status: null, transport: tls-handshake-failure}
+- {path: /.well-known/ai-plugin.json, status: null, transport: tls-handshake-failure}
+- {path: /.well-known/agent-card.json, status: null, transport: tls-handshake-failure}
+- {path: /.well-known/agent.json, status: null, transport: tls-handshake-failure}
+hosts_that_do_not_exist:
+- {host: api.jam.gg, dns: NXDOMAIN}
+- {host: app.jam.gg, dns: NXDOMAIN}
+- {host: docs.jam.gg, dns: NXDOMAIN}
+- {host: developers.jam.gg, dns: NXDOMAIN}
+- {host: business.jam.gg, dns: NXDOMAIN}
+- {host: blog.jam.gg, dns: NXDOMAIN}
+- {host: status.jam.gg, dns: NXDOMAIN}
+- {host: play.jam.gg, dns: NXDOMAIN}
+- {host: piepacker.com, dns: NXDOMAIN, note: 'the domain still listed as the blog on the GitHub org'}

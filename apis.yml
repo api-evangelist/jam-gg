@@ -1,18 +1,39 @@
 aid: jam-gg
 name: Jam.gg
-description: 'Jam.gg is a company surfaced as a portfolio company of serena and added to the API Evangelist
-  network as a stub for enrichment. Sector: gaming. This profile is a lead awaiting the enrichment pipeline.'
+description: >-
+  Jam.gg, founded in Paris in 2020 as Piepacker and rebranded in 2022, built a browser-based social
+  cloud gaming platform for playing retro and indie multiplayer games with friends with no download or
+  install, on patented streaming technology the company said cut bandwidth requirements by roughly 15x.
+  It passed 8 million users before pivoting to selling its cloud gaming technology B2B to game
+  developers and publishers. Backed by Makers Fund, Serena Capital, LEGO Ventures, Kima Ventures and
+  Kickstarter (~$15.4M raised) and a Y Combinator W20 company. Jam.gg never published an HTTP API: its
+  developer surface was a native game-integration SDK plus a Compose Multiplatform virtual gamepad
+  library, both shipped from the GitHub organization still named piepacker. Y Combinator's company
+  directory now lists Jam.gg as Inactive, noting the business split into two entities in 2023 with
+  Onibi emerging separately; the jam.gg web property no longer completes a TLS handshake and
+  piepacker.com has left DNS.
 url: https://raw.githubusercontent.com/api-evangelist/jam-gg/refs/heads/main/apis.yml
+image: https://avatars.githubusercontent.com/u/51542573?v=4
 x-type: company
 x-source: serena-portfolio
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: historical
+x-tier-reason: inactive-no-api-surface
+x-status: inactive
+x-status-source: https://www.ycombinator.com/companies/jam-gg
+x-former-name: Piepacker
 specificationVersion: '0.20'
 created: '2026-08-17'
 modified: '2026-08-17'
 tags:
 - Company
 - Gaming
+- Cloud Gaming
+- Games
+- Game Development
+- Emulation
+- SDK
+- WebRTC
+- France
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -20,5 +41,49 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/jam-gg-domain-security.yml
 - type: Website
-  url: https://jam.gg/fr
+  url: https://jam.gg/
+- type: GitHubOrganization
+  url: https://github.com/piepacker
+- type: Packages
+  url: packages/jam-gg-packages.yml
+- type: SDKs
+  url: packages/jam-gg-packages.yml
+- type: Sandbox
+  url: sandbox/jam-gg-sandbox.yml
+- type: Plans
+  url: plans/jam-gg-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/jam-gg-rate-limits.yml
+- type: LLMsTxt
+  url: llms/jam-gg-llms.txt
+x-enrichment:
+  date: '2026-08-17'
+  status: minimal
+  artifacts_added: 7
+  pass: local-v1
+x-coverage:
+  state: none
+  reason: defunct
+  detail: >-
+    Jam.gg never shipped an HTTP API, and the company is now listed Inactive by Y Combinator — its own
+    web property cannot complete a TLS handshake on either host (jam.gg answers the ClientHello with
+    TLS alert 80 internal_error from Netlify/AWS Global Accelerator, www.jam.gg answers with alert 40
+    handshake_failure from the Webflow proxy), piepacker.com has left DNS, and no api/docs/developers
+    subdomain resolves, so the only reachable artifacts are the first-party SDK repositories on GitHub.
+  evidence:
+  - url: http://jam.gg/
+    status: 301
+  - url: https://jam.gg/
+    status: 0
+  - url: https://www.jam.gg/
+    status: 0
+  - url: https://www.ycombinator.com/companies/jam-gg
+    status: 200
+  - url: https://github.com/piepacker
+    status: 200
+  - url: https://repo1.maven.org/maven2/io/github/piepacker/jampadcompose/maven-metadata.xml
+    status: 200
+  checked: '2026-08-17'
