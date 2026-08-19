@@ -21,7 +21,7 @@ x-tier-reason: inactive-no-api-surface
 x-status: inactive
 x-status-source: https://www.ycombinator.com/companies/jam-gg
 x-former-name: Piepacker
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-08-17'
 modified: '2026-08-17'
 tags:
