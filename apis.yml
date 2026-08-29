@@ -13,6 +13,17 @@ description: >-
   Onibi emerging separately; the jam.gg web property no longer completes a TLS handshake and
   piepacker.com has left DNS.
 url: https://raw.githubusercontent.com/api-evangelist/jam-gg/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://avatars.githubusercontent.com/u/51542573?v=4
 x-type: company
 x-source: serena-portfolio
